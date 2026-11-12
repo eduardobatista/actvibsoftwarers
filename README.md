@@ -9,6 +9,13 @@ It speaks the same serial protocol as the Python version and reads/writes the
 same Feather and CSV files, so recordings and `metacontrol.feather` files are
 interchangeable between both versions and with pandas.
 
+## Download
+
+Single-file executables for Windows 10/11 x64 and Linux x86_64 (glibc 2.35+:
+Ubuntu 22.04+, Debian 12+) are on the
+[Releases page](https://github.com/eduardobatista/actvibsoftwarers/releases).
+See `LEIAME-turma.txt` for quick-start instructions (in Portuguese).
+
 ## Building
 
 Requires a recent stable Rust toolchain (edition 2024).
