@@ -1,5 +1,21 @@
 # ActVib (Rust)
 
+## ⬇️ Download — versão 0.1.0
+
+| Sistema | Baixar |
+|---|---|
+| **Windows 10/11** (64 bits) | **[ActVib-0.1.0-windows-x64.exe](https://github.com/eduardobatista/actvibsoftwarers/releases/latest/download/ActVib-0.1.0-windows-x64.exe)** |
+| **Linux** (Ubuntu 22.04+, Debian 12+, Fedora, Arch) | **[ActVib-0.1.0-linux-x86_64](https://github.com/eduardobatista/actvibsoftwarers/releases/latest/download/ActVib-0.1.0-linux-x86_64)** |
+
+Arquivo único, sem instalação. Instruções: [LEIAME.txt](https://github.com/eduardobatista/actvibsoftwarers/releases/latest/download/LEIAME.txt) ·
+Checksums: [SHA256SUMS.txt](https://github.com/eduardobatista/actvibsoftwarers/releases/latest/download/SHA256SUMS.txt) ·
+[Página da release](https://github.com/eduardobatista/actvibsoftwarers/releases/latest)
+
+- **Windows:** se o SmartScreen avisar, clique em *Mais informações → Executar assim mesmo*.
+- **Linux:** `chmod +x ActVib-0.1.0-linux-x86_64 && ./ActVib-0.1.0-linux-x86_64`
+
+---
+
 Rust port of [ActVibSoftware](https://github.com/eduardobatista/ActVibSoftware):
 a desktop application for monitoring, data acquisition, path modeling and
 active control of laboratory vibration experiments using an ESP32-based
@@ -8,13 +24,6 @@ controller running [ActVibFirmware](https://github.com/eduardobatista/ActVibFirm
 It speaks the same serial protocol as the Python version and reads/writes the
 same Feather and CSV files, so recordings and `metacontrol.feather` files are
 interchangeable between both versions and with pandas.
-
-## Download
-
-Single-file executables for Windows 10/11 x64 and Linux x86_64 (glibc 2.35+:
-Ubuntu 22.04+, Debian 12+) are on the
-[Releases page](https://github.com/eduardobatista/actvibsoftwarers/releases).
-See `LEIAME-turma.txt` for quick-start instructions (in Portuguese).
 
 ## Building
 
