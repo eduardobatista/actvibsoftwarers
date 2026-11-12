@@ -13,7 +13,7 @@ use sha2::{Digest, Sha256};
 
 use crate::dataman::Shared;
 
-pub const SOFTWARE_RELEASES_URL: &str = "https://github.com/eduardobatista/ActVibSoftware/releases";
+pub const SOFTWARE_RELEASES_URL: &str = "https://github.com/eduardobatista/actvibsoftwarers/releases";
 pub const FIRMWARE_RELEASE_API: &str =
     "https://api.github.com/repos/eduardobatista/ActVibFirmware/releases/latest";
 pub const FIRMWARE_FALLBACK_URL: &str =

@@ -1384,7 +1384,7 @@ impl eframe::App for ActVibApp {
         }
     }
 
-    fn on_exit(&mut self) {
+    fn on_exit(&mut self, _gl: Option<&eframe::glow::Context>) {
         if !self.allow_close {
             self.persist();
         }
