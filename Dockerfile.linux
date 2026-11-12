@@ -1,0 +1,10 @@
+# Builds a Linux binary against an old glibc (2.35, Ubuntu 22.04) so it runs on
+# Ubuntu 22.04+, Debian 12+ and other current distributions.
+FROM ubuntu:22.04
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        curl ca-certificates build-essential pkg-config libudev-dev \
+    && rm -rf /var/lib/apt/lists/*
+RUN curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain 1.98.1
+ENV PATH=/root/.cargo/bin:$PATH
+WORKDIR /src

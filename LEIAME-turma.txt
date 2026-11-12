@@ -1,0 +1,32 @@
+ActVib 0.1.0 (versão em Rust) - versão de teste
+================================================
+
+Arquivo único, não precisa instalar nada além do driver USB.
+
+WINDOWS 10/11 (64 bits)
+  1. Baixe ActVib-0.1.0-windows-x64.exe e dê dois cliques.
+  2. O Windows SmartScreen pode avisar que o programa não é assinado:
+     clique em "Mais informações" > "Executar assim mesmo".
+  3. Instale o driver USB da placa, se a porta COM não aparecer:
+     - CP210x: https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers
+     - CH340/CH341: https://www.wch-ic.com/downloads/CH341SER_EXE.html
+
+LINUX (Ubuntu 22.04+, Debian 12+, Fedora, Arch...)
+  1. chmod +x ActVib-0.1.0-linux-x86_64
+  2. ./ActVib-0.1.0-linux-x86_64
+  3. Se a porta serial aparecer mas não abrir (permissão negada), adicione
+     seu usuário ao grupo dono do dispositivo e faça logout/login:
+       sudo usermod -aG dialout "$USER"     # Debian/Ubuntu
+       sudo usermod -aG uucp "$USER"        # Arch
+
+USO
+  - Selecione a porta em Setup > Port antes de iniciar.
+  - Espaço inicia/para a aquisição; Ctrl+S salva os dados.
+  - Os arquivos .feather/.csv são compatíveis com a versão em Python e com o pandas.
+  - Configurações ficam em ~/.config/actvib (Linux) ou %APPDATA%\ActVib\ActVib\config (Windows);
+    as configurações da versão Python não são importadas.
+
+Para conferir a integridade dos downloads, compare com SHA256SUMS.txt.
+
+Esta é uma versão de teste: anote qualquer erro (mensagem da barra de
+status, o que estava fazendo) e envie ao professor.
