@@ -1,10 +1,10 @@
-ActVib 0.1.1 (versão em Rust) - versão de teste
+ActVib 0.1.2 (versão em Rust) - versão de teste
 ================================================
 
 Arquivo único, não precisa instalar nada além do driver USB.
 
 WINDOWS 10/11 (64 bits)
-  1. Baixe ActVib-0.1.1-windows-x64.exe e dê dois cliques.
+  1. Baixe ActVib-0.1.2-windows-x64.exe e dê dois cliques.
   2. O Windows SmartScreen pode avisar que o programa não é assinado:
      clique em "Mais informações" > "Executar assim mesmo".
   3. Instale o driver USB da placa, se a porta COM não aparecer:
@@ -12,8 +12,8 @@ WINDOWS 10/11 (64 bits)
      - CH340/CH341: https://www.wch-ic.com/downloads/CH341SER_EXE.html
 
 LINUX (Ubuntu 22.04+, Debian 12+, Fedora, Arch...)
-  1. chmod +x ActVib-0.1.1-linux-x86_64
-  2. ./ActVib-0.1.1-linux-x86_64
+  1. chmod +x ActVib-0.1.2-linux-x86_64
+  2. ./ActVib-0.1.2-linux-x86_64
   3. Se a porta serial aparecer mas não abrir (permissão negada), adicione
      seu usuário ao grupo dono do dispositivo e faça logout/login:
        sudo usermod -aG dialout "$USER"     # Debian/Ubuntu

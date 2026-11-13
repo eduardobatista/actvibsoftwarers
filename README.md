@@ -1,18 +1,18 @@
 # ActVib (Rust)
 
-## ⬇️ Download — versão 0.1.1
+## ⬇️ Download — versão 0.1.2
 
 | Sistema | Baixar |
 |---|---|
-| **Windows 10/11** (64 bits) | **[ActVib-0.1.1-windows-x64.exe](https://github.com/eduardobatista/actvibsoftwarers/releases/latest/download/ActVib-0.1.1-windows-x64.exe)** |
-| **Linux** (Ubuntu 22.04+, Debian 12+, Fedora, Arch) | **[ActVib-0.1.1-linux-x86_64](https://github.com/eduardobatista/actvibsoftwarers/releases/latest/download/ActVib-0.1.1-linux-x86_64)** |
+| **Windows 10/11** (64 bits) | **[ActVib-0.1.2-windows-x64.exe](https://github.com/eduardobatista/actvibsoftwarers/releases/latest/download/ActVib-0.1.2-windows-x64.exe)** |
+| **Linux** (Ubuntu 22.04+, Debian 12+, Fedora, Arch) | **[ActVib-0.1.2-linux-x86_64](https://github.com/eduardobatista/actvibsoftwarers/releases/latest/download/ActVib-0.1.2-linux-x86_64)** |
 
 Arquivo único, sem instalação. Instruções: [LEIAME.txt](https://github.com/eduardobatista/actvibsoftwarers/releases/latest/download/LEIAME.txt) ·
 Checksums: [SHA256SUMS.txt](https://github.com/eduardobatista/actvibsoftwarers/releases/latest/download/SHA256SUMS.txt) ·
 [Página da release](https://github.com/eduardobatista/actvibsoftwarers/releases/latest)
 
 - **Windows:** se o SmartScreen avisar, clique em *Mais informações → Executar assim mesmo*.
-- **Linux:** `chmod +x ActVib-0.1.1-linux-x86_64 && ./ActVib-0.1.1-linux-x86_64`
+- **Linux:** `chmod +x ActVib-0.1.2-linux-x86_64 && ./ActVib-0.1.2-linux-x86_64`
 
 ---
 

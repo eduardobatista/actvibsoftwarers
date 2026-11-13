@@ -195,7 +195,12 @@ pub fn time_plot(
         cfg.maxy = hi - span * 0.01 / 1.02;
     }
     let menu_id = egui::Id::unique((id, "menu_open"));
-    resp.response.context_menu(|ui| {
+    // Close only on clicks outside the menu: the default (close on any click)
+    // shuts the menu as soon as the sensor combo box, a checkbox or a text
+    // field inside it is clicked.
+    egui::Popup::context_menu(&resp.response)
+        .close_behavior(egui::PopupCloseBehavior::CloseOnClickOutside)
+        .show(|ui| {
         let was_open = ui
             .ctx()
             .data(|d| d.get_temp::<bool>(menu_id))
@@ -254,6 +259,25 @@ pub const SENSOR_CHOICES: [&str; 7] = [
     "IMU2 Gyro",
     "IMU3 Gyro",
 ];
+
+/// Sensor selection and XYZ toggles shown in the IMU plots' context menu.
+/// The sensor list is a submenu: a ComboBox cannot be used here because egui
+/// keeps a single popup open per viewport, so opening the combo's popup closes
+/// the context menu (and the combo with it) immediately.
+fn sensor_menu(ui: &mut Ui, sc: &mut usize, xyz: &mut [bool; 3]) {
+    ui.menu_button(format!("Sensor: {}", SENSOR_CHOICES[*sc]), |ui| {
+        for (i, name) in SENSOR_CHOICES.iter().enumerate() {
+            if ui.add(egui::Button::selectable(*sc == i, *name)).clicked() {
+                *sc = i;
+            }
+        }
+    });
+    ui.horizontal(|ui| {
+        ui.checkbox(&mut xyz[0], "X");
+        ui.checkbox(&mut xyz[1], "Y");
+        ui.checkbox(&mut xyz[2], "Z");
+    });
+}
 
 /// Main (measurement) figure: two IMU plots plus the ADC plot.
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
@@ -323,17 +347,7 @@ impl MainFig {
                 h,
                 &Self::ylabel(choice),
                 lines,
-                |ui| {
-                    ui.horizontal(|ui| {
-                        ui.label("Sensor:");
-                        crate::panels::combo(ui, ("sensorchoice", k), sc, &SENSOR_CHOICES, None);
-                    });
-                    ui.horizontal(|ui| {
-                        ui.checkbox(&mut xyz[0], "X");
-                        ui.checkbox(&mut xyz[1], "Y");
-                        ui.checkbox(&mut xyz[2], "Z");
-                    });
-                },
+                |ui| sensor_menu(ui, sc, xyz),
             );
         }
         if self.show_adc {
@@ -485,5 +499,60 @@ mod tests {
         assert!(d.len() <= 1000);
         assert!(d.iter().any(|p| p[1] == 10.0));
         assert!(d.iter().any(|p| p[1] == -3.0));
+    }
+}
+
+#[cfg(test)]
+mod menu_tests {
+    //! Drives the real plot context menu headlessly: right-click the plot,
+    //! pick a sensor from the submenu and toggle an axis checkbox. The menu
+    //! must stay open throughout (regression: it closed on the first click).
+    use super::*;
+    use egui::{Event, PointerButton, pos2};
+    use egui_kittest::Harness;
+    use egui_kittest::kittest::Queryable;
+
+    struct St {
+        cfg: PlotCfg,
+        sc: usize,
+        xyz: [bool; 3],
+    }
+
+    #[test]
+    fn sensor_can_be_selected_from_plot_menu() {
+        let mut h = Harness::builder()
+            .with_size(egui::vec2(800.0, 500.0))
+            .with_accessibility_check(false).build_ui_state(
+            |ui, st: &mut St| {
+                let (cfg, sc, xyz) = (&mut st.cfg, &mut st.sc, &mut st.xyz);
+                time_plot(ui, "p", cfg, 300.0, "y", vec![], |ui| sensor_menu(ui, sc, xyz));
+            },
+            St { cfg: PlotCfg::with_y(-1.0, 1.0), sc: 1, xyz: [true; 3] },
+        );
+        h.run();
+        let p = pos2(400.0, 100.0);
+        h.hover_at(p);
+        for pressed in [true, false] {
+            h.event(Event::PointerButton {
+                pos: p,
+                button: PointerButton::Secondary,
+                pressed,
+                modifiers: Default::default(),
+            });
+        }
+        h.run();
+
+        h.get_by_label("Sensor: IMU1 Accel").click();
+        h.run();
+        h.get_by_label("IMU2 Gyro").click();
+        h.run();
+        assert_eq!(h.state().sc, 5);
+        // The menu is still open and shows the new choice.
+        h.get_by_label("Sensor: IMU2 Gyro");
+
+        h.get_by_label("Y").click();
+        h.run();
+        assert_eq!(h.state().xyz, [true, false, true]);
+        h.get_by_label("Sensor: IMU2 Gyro");
     }
 }
